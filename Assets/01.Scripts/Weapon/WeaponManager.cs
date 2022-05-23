@@ -3,19 +3,23 @@ using UnityEngine;
 public class WeaponManager : MonoBehaviour
 {
     [SerializeField] private Transform pocket;
-    //[SerializeField] private Transform firePos;
     [SerializeField] private Transform hand;
     [SerializeField] private Transform grabPoint;
     [SerializeField] private Transform player;
 
+    [SerializeField] private GameObject bullet;
+
     public LayerMask enemyLayer;
 
     public static WeaponManager Instance;
+
+    PlayerMove playerMove;
     //private int weaponUnitCount = 0;
 
     private void Awake()
     {
         Instance = this;
+        playerMove = GameObject.Find("Player").GetComponent<PlayerMove>();
     }
 
 
@@ -32,7 +36,7 @@ public class WeaponManager : MonoBehaviour
 
     public void Disarm(GameObject weapon)
     {
-        Vector3 pocketRot = new Vector3 (0, 0, 112);
+        Vector3 pocketRot = new Vector3 (0, 0, -112);
 
         if(Input.GetKeyDown(KeyCode.X) && weapon.transform.parent != pocket.transform)
         {
@@ -44,16 +48,18 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
-    public void Fire(Transform firePos,GameObject damageDealer, float damage)
+    public void Fire(Transform firePos, GameObject damageDealer, float damage)
     {
+
+
         RaycastHit2D hit;
         Collider2D col;
 
         if (Input.GetMouseButtonDown(0))
         {
 
-            hit = Physics2D.Raycast(firePos.position, -firePos.right * 10, enemyLayer);
-            Debug.DrawRay(firePos.position, -firePos.right * 10, Color.red, 0.3f);
+            hit = Physics2D.Raycast(firePos.position, Vector2.right * 10, enemyLayer);
+            Debug.DrawRay(firePos.position, Vector2.right * 10, Color.red, 0.3f);
 
             if (hit)
             {
