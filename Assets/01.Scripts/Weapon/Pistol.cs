@@ -10,11 +10,6 @@ public class Pistol : MonoBehaviour
     [SerializeField] float fireDelay = 1;
     [SerializeField] float damage = 1;
 
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
         WeaponManager.Instance.Disarm(this.gameObject);

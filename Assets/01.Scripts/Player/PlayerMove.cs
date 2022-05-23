@@ -29,13 +29,13 @@ public class PlayerMove : MonoBehaviour
         float moveDirValue = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(moveDirValue * MoveSpeed, rb.velocity.y);
 
-        Vector2 look = transform.localScale;
+        /*Vector2 look = transform.localScale;
         Vector2 leftLook = new Vector2(-1.5f, 1.5f);
-        Vector2 rightLook = new Vector2(1.5f, 1.5f);
+        Vector2 rightLook = new Vector2(1.5f, 1.5f);*/
 
-        if (moveDirValue == 1) { look = leftLook; }
-        else if (moveDirValue == -1) { look = rightLook; }
-        transform.localScale = look;
+        if (moveDirValue == 1) { transform.localRotation = Quaternion.Euler(0, 0, 0); }
+        else if (moveDirValue == -1) { transform.localRotation = Quaternion.Euler(0, 180, 0); }
+        //transform.localScale = look;
     }
 
     private void Jump()
