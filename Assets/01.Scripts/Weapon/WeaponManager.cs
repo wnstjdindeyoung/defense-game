@@ -22,8 +22,6 @@ public class WeaponManager : MonoBehaviour
         playerMove = GameObject.Find("Player").GetComponent<PlayerMove>();
     }
 
-
-
     public void Armed(GameObject weapon)
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
