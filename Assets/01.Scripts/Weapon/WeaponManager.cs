@@ -9,7 +9,9 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private Transform HandTrm;
 
-    [SerializeField] private GameObject bullet;
+    [SerializeField] private PoolableMono bullet;
+
+    [SerializeField] private GameObject activeWeapon;
 
     public LayerMask enemyLayer;
 
@@ -25,8 +27,6 @@ public class WeaponManager : MonoBehaviour
         Instance = this;
         playerMove = GameObject.Find("Player").GetComponent<PlayerMove>();
     }
-
-
 
     public void Armed(GameObject weapon, Action GunSetting)
     {
@@ -63,7 +63,8 @@ public class WeaponManager : MonoBehaviour
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
         if(Input.GetMouseButtonDown(0))
         {
-            Instantiate(bullet, firePos.position, Quaternion.AngleAxis(angle, Vector3.forward));
+            PoolManager.instance.Pop("Bullet");
+            //Instantiate(bullet, firePos.position, Quaternion.AngleAxis(angle, Vector3.forward));
         }
         
 
