@@ -2,8 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class Bullet : PoolableMono
 {
+    public override void Reset()
+    {
+        
+    }
+
     [SerializeField] private float speed = 5f;
 
     Rigidbody2D rb;

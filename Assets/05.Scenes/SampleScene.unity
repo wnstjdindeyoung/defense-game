@@ -223,6 +223,51 @@ MonoBehaviour:
   fireDelay: 1
   damage: 1
   isWork: 1
+--- !u!1 &311332792
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 311332794}
+  - component: {fileID: 311332793}
+  m_Layer: 0
+  m_Name: Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &311332793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 311332792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8f9adb00a57ee741837f960774d88f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolingList:
+  - {fileID: 948858640573274030, guid: 7e86616632c1e9f44a58ec9d3d50e43e, type: 3}
+--- !u!4 &311332794
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 311332792}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &353728259
 GameObject:
   m_ObjectHideFlags: 0
@@ -257,7 +302,7 @@ MonoBehaviour:
   grabPoint: {fileID: 955012332}
   player: {fileID: 616722610}
   HandTrm: {fileID: 1406437079}
-  bullet: {fileID: 948858640573274031, guid: 7e86616632c1e9f44a58ec9d3d50e43e, type: 3}
+  bullet: {fileID: 948858640573274030, guid: 7e86616632c1e9f44a58ec9d3d50e43e, type: 3}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
