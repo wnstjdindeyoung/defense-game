@@ -7,13 +7,21 @@ public class Pistol : MonoBehaviour
     [SerializeField] private Transform firePos;
 
     private float currentDelay = 0;
-    [SerializeField] float fireDelay = 1;
-    [SerializeField] float damage = 1;
+    [SerializeField] private float fireDelay = 1;
+    [SerializeField] private float damage = 1;
+    [SerializeField] private bool isWork = false;
 
     void Update()
-    {
-        WeaponManager.Instance.Disarm(this.gameObject);
-        WeaponManager.Instance.Armed(this.gameObject);
-        WeaponManager.Instance.Fire(firePos, this.gameObject, damage);
+    {   
+        if (isWork) 
+        { 
+            WeaponManager.Instance.Disarm(this.gameObject, () => isWork = false);
+            WeaponManager.Instance.Fire(firePos, this.gameObject, damage);
+        }
+
+        if(!isWork) 
+        { 
+            WeaponManager.Instance.Armed(this.gameObject, () => isWork = true);
+        }
     }
 }
