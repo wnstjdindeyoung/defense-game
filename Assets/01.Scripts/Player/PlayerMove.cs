@@ -13,6 +13,8 @@ public class PlayerMove : MonoBehaviour
     public LayerMask groundLayer;
     public float moveDirValue;
 
+    public bool lookLeft = false;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -33,8 +35,16 @@ public class PlayerMove : MonoBehaviour
         Vector2 leftLook = new Vector2(-1.5f, 1.5f);
         Vector2 rightLook = new Vector2(1.5f, 1.5f);*/
 
-        if (moveDirValue == 1) { transform.localRotation = Quaternion.Euler(0, 0, 0); }
-        else if (moveDirValue == -1) { transform.localRotation = Quaternion.Euler(0, 180, 0); }
+        if (moveDirValue == 1) 
+        { 
+            transform.localRotation = Quaternion.Euler(0, 0, 0); 
+            lookLeft = false;
+        }
+        else if (moveDirValue == -1) 
+        { 
+            transform.localRotation = Quaternion.Euler(0, 180, 0); 
+            lookLeft = true;
+        }
         //transform.localScale = look;
     }
 

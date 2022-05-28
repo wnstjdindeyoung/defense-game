@@ -15,17 +15,13 @@ public class WeaponManager : MonoBehaviour
 
     public LayerMask enemyLayer;
 
-    HandRotate handRotate;
-
     public static WeaponManager Instance;
 
-    PlayerMove playerMove;
     //private int weaponUnitCount = 0;
 
     private void Awake()
     {
         Instance = this;
-        playerMove = GameObject.Find("Player").GetComponent<PlayerMove>();
     }
 
     public void Armed(GameObject weapon, Action GunSetting)
@@ -35,6 +31,7 @@ public class WeaponManager : MonoBehaviour
             weapon.transform.parent = grabPoint.transform;
             weapon.transform.position = grabPoint.transform.position;
             weapon.transform.localEulerAngles = Vector3.zero;
+            activeWeapon = weapon;
             GunSetting?.Invoke();
         }
     }
@@ -56,35 +53,9 @@ public class WeaponManager : MonoBehaviour
 
     public void Fire(Transform firePos, GameObject damageDealer, float damage)
     {
-
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 lookDir = (mousePos - HandTrm.transform.position);
-
-        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
-        if(Input.GetMouseButtonDown(0))
-        {
+            Vector3 lookDir = HandTrm.eulerAngles;
+            float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
+            
             PoolManager.instance.Pop("Bullet");
-            //Instantiate(bullet, firePos.position, Quaternion.AngleAxis(angle, Vector3.forward));
-        }
-        
-
-        /*
-
-        RaycastHit2D hit;
-        Collider2D col;
-
-        if (Input.GetMouseButtonDown(0))
-        {
-
-            hit = Physics2D.Raycast(firePos.position, Vector2.right * 10, enemyLayer);
-            Debug.DrawRay(firePos.position, Vector2.right * 10, Color.red, 0.3f);
-
-            if (hit)
-            {
-                col = hit.collider;
-                IDamageable iDmg = col.GetComponent<IDamageable>();
-                iDmg.OnDamage(damage, damageDealer);
-            }
-        }*/
     }
 }
