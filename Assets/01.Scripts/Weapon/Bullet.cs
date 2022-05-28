@@ -7,29 +7,35 @@ public class Bullet : PoolableMono
 {
     [SerializeField] private float speed = 5f;
     [SerializeField] private float lifeTime = 1f;
-    [SerializeField] private float damage;
+    [SerializeField] private float damage = 1;
 
     private Transform handTrm;
     private Transform firePos;
 
     Rigidbody2D rb;
 
-    public float Damage()
+    public float SetDamage(float value)
     {
+        damage = value;
         return damage;
+    }
+    public Transform SetFirePos(Transform value)
+    {
+        firePos = value;
+        return firePos;
     }
 
     public override void Reset()
     {
         transform.rotation = handTrm.rotation;
-        transform.position = firePos.position;
+        //transform.position = firePos.position;
     }
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         handTrm = GameObject.Find("Hand").GetComponent<Transform>();
-        firePos = GameObject.Find("FirePosition").GetComponent<Transform>();
+        //firePos = GameObject.Find("FirePosition").GetComponent<Transform>();
     }
 
     // Update is called once per frame

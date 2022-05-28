@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pistol : MonoBehaviour
+public class Rifle : MonoBehaviour
 {
     [SerializeField] private Transform firePos;
 
@@ -19,21 +19,21 @@ public class Pistol : MonoBehaviour
     }
 
     void Update()
-    {   
-        if (isWork) 
-        { 
+    {
+        if (isWork)
+        {
             currentDelayTime += Time.deltaTime;
 
             WeaponManager.Instance.Disarm(this.gameObject, () => isWork = false);
-            if(Input.GetMouseButtonDown(0) && currentDelayTime >= fireDelayTime)
+            if (Input.GetMouseButtonDown(0) && currentDelayTime >= fireDelayTime)
             {
                 WeaponManager.Instance.Fire(firePos, this.gameObject, damage);
                 currentDelayTime = 0;
             }
         }
 
-        if(!isWork) 
-        { 
+        if (!isWork)
+        {
             WeaponManager.Instance.Armed(this.gameObject, () => isWork = true);
         }
     }

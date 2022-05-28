@@ -8,11 +8,11 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float MoveSpeed = 5f;
     [SerializeField] private float JumpPower = 5f;
     [SerializeField] private Transform footPos;
+    [SerializeField] private LayerMask groundLayer;
+
     private bool isGround = false;
     private float radios = 0.3f;
-    public LayerMask groundLayer;
-    public float moveDirValue;
-
+    
     public bool lookLeft = false;
 
     void Awake()
@@ -30,22 +30,21 @@ public class PlayerMove : MonoBehaviour
     {
         float moveDirValue = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(moveDirValue * MoveSpeed, rb.velocity.y);
+        
+        //방향 전환
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 lookDir = transform.position - mousePos;
 
-        /*Vector2 look = transform.localScale;
-        Vector2 leftLook = new Vector2(-1.5f, 1.5f);
-        Vector2 rightLook = new Vector2(1.5f, 1.5f);*/
-
-        if (moveDirValue == 1) 
+        if (lookDir.x < 0) 
         { 
             transform.localRotation = Quaternion.Euler(0, 0, 0); 
             lookLeft = false;
         }
-        else if (moveDirValue == -1) 
+        else if (lookDir.x > 0) 
         { 
             transform.localRotation = Quaternion.Euler(0, 180, 0); 
             lookLeft = true;
         }
-        //transform.localScale = look;
     }
 
     private void Jump()

@@ -8,10 +8,11 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] private Transform grabPoint;
     [SerializeField] private Transform player;
     [SerializeField] private Transform HandTrm;
+    [SerializeField] private Transform firePos;
 
     [SerializeField] private PoolableMono bullet;
 
-    [SerializeField] private GameObject activeWeapon;
+    [SerializeField] public GameObject activeWeapon;
 
     public LayerMask enemyLayer;
 
@@ -32,6 +33,7 @@ public class WeaponManager : MonoBehaviour
             weapon.transform.position = grabPoint.transform.position;
             weapon.transform.localEulerAngles = Vector3.zero;
             activeWeapon = weapon;
+            firePos = activeWeapon.GetComponentInChildren<Transform>();
             GunSetting?.Invoke();
         }
     }
@@ -47,15 +49,20 @@ public class WeaponManager : MonoBehaviour
             weapon.transform.parent = pocket.transform;
             weapon.transform.position = pocket.position;
             weapon.transform.localEulerAngles = pocketRot;
+            activeWeapon = null;
             Unsetting?.Invoke();
         }
     }
 
     public void Fire(Transform firePos, GameObject damageDealer, float damage)
     {
-            Vector3 lookDir = HandTrm.eulerAngles;
-            float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
+        Vector3 lookDir = HandTrm.eulerAngles;
+        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
             
-            PoolManager.instance.Pop("Bullet");
+        bullet = PoolManager.instance.Pop("Bullet");
+        Bullet bulletSc = bullet.GetComponent<Bullet>();
+        bullet.transform.position = firePos.position;
+        //bulletSc.SetFirePos(firePos);
+        bulletSc.SetDamage(damage);
     }
 }
